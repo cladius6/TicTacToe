@@ -9,12 +9,12 @@ class TicTacToe:
         for i in range(3):
             row = []
             for j in range(3):
-                row.append(' ')
+                row.append(None)
             self.board.append(row)
 
     def insert_sign(self, position):
         position += -1
-        sign = 'O' if self.turn else 'X'
+        sign = 1 if self.turn else 0
         self.turn = False if self.turn else True
         if 0 <= position <= 2:
             self.board[0][position] = sign
@@ -29,9 +29,9 @@ class TicTacToe:
             # Check horizontal
             for i in range(3):
                 for j in range(3):
-                    if self.board[i][j] == 'X':
+                    if self.board[i][j] == 0:
                         sum += 1
-                    elif self.board[i][j] == 'O':
+                    elif self.board[i][j] == 1:
                         sum += -1
                 if sum == 3:
                     print('X won')
@@ -44,9 +44,9 @@ class TicTacToe:
             # Check vertical
             for i in range(3):
                 for j in range(3):
-                    if self.board[j][i] == 'X':
+                    if self.board[j][i] == 0:
                         sum += 1
-                    elif self.board[j][i] == 'O':
+                    elif self.board[j][i] == 1:
                         sum += -1
                 if sum == 3:
                     print('X won')
@@ -58,9 +58,9 @@ class TicTacToe:
                     sum = 0
             # Check 2 diagonal
             for i in range(3):
-                if self.board[i][2-i] == 'X':
+                if self.board[i][2-i] == 0:
                     sum += 1
-                elif self.board[i][2-i] == 'O':
+                elif self.board[i][2-i] == 1:
                     sum += -1
                 if sum == 3:
                     print('X won')
@@ -71,9 +71,9 @@ class TicTacToe:
             sum = 0
             # Check 1 diagonal
             for i in range(3):
-                if self.board[i][i] == 'X':
+                if self.board[i][i] == 0:
                     sum += 1
-                elif self.board[i][i] == 'O':
+                elif self.board[i][i] == 1:
                     sum += -1
                 if sum == 3:
                     print('X won')
@@ -88,10 +88,18 @@ class TicTacToe:
 
 
     def print_board(self):
+        print(' ----- ')
         for i in range(3):
             for j in range(3):
-                print('|' + self.board[i][j], end='')
+                if self.board[i][j] == None:
+                    print('|' + ' ', end='')
+                elif self.board[i][j] == 0:
+                    print('|' + 'X', end='')
+                else:
+                    print('|' + 'O', end='')
+
             print('|')
+            print(' ----- ')
 
 
 def startGame():
